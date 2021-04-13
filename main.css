@@ -1,0 +1,75 @@
+.gameBoard {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (100px)[3];
+      grid-template-columns: repeat(3, 100px);
+  -ms-grid-rows: (100px)[3];
+      grid-template-rows: repeat(3, 100px);
+}
+
+.gameBoard button {
+  border-bottom: 1px solid #203647;
+  border-right: 1px solid #203647;
+  font-size: 58px;
+}
+
+*,
+*::after,
+*::before {
+  padding: 0;
+  margin: 0;
+  outline: none;
+  border: none;
+  background: none;
+}
+
+button {
+  cursor: pointer;
+  border-radius: 0;
+}
+
+body {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: auto 1fr auto;
+      grid-template-rows: auto 1fr auto;
+  -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
+      grid-template-areas: "header" "content" "footer";
+  justify-items: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+header {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: header;
+}
+
+main {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+  grid-area: content;
+  width: 100%;
+  height: 100%;
+  display: -ms-grid;
+  display: grid;
+  justify-items: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+footer {
+  -ms-grid-row: 3;
+  -ms-grid-column: 1;
+  grid-area: footer;
+}
+
+header,
+footer {
+  width: 100%;
+  text-align: center;
+}
+/*# sourceMappingURL=main.css.map */
