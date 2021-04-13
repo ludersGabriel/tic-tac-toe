@@ -7,6 +7,9 @@ board.BuildBoard();
 board.DisplayBoard();
 
 for (let cell of board.GetCells()) {
-  cell.addEventListener('click', (e) => console.log(e.target.dataset.id));
+  cell.addEventListener('click', (e) => {
+    const id = e.target.dataset.id;
+    board.MarkBoard(id, 'x');
+  });
 }
 
