@@ -1,49 +1,54 @@
 class Game {
-  #board = null;
-  #player = null;
-  #modal = null;
+  board = null;
+  player = null;
+  modal = null;
+  body = null;
   constructor(board, player) {
-    this.#board = board;
-    this.#player = player;
-    this.#modal = document.querySelector('#modal');
+    this.board = board;
+    this.player = player;
+    this.modal = document.querySelector('#modal');
+    this.body = document.querySelector('#body');
   }
 
-  #sleep = (ms) => {
+  sleep = (ms) => {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  #BuilEventListeners = () => {
-    for (let cell of this.#board.GetCells()) {
+  BuildEventListeners = () => {
+    for (let cell of this.board.GetCells()) {
       cell.addEventListener('click', (e) => {
         const id = e.target.dataset.id;
-        this.#board.MarkBoard(id, this.#player.GetMark());
+        this.board.MarkBoard(id, this.player.GetMark());
         this.IsOver();
       });
     }
   }
 
   PlayGame() {
-    this.#board.BuildBoard();
-    this.#board.DisplayBoard();
-    this.#BuilEventListeners();
+    this.board.BuildBoard();
+    this.board.DisplayBoard();
+    this.BuildEventListeners();
   }
 
   CleanBoard() {
-    this.#board.CleanBoard();
+    this.board.CleanBoard();
   }
 
-  #EndRound = async (message) => {
-    const modalText = this.#modal.querySelector('#modalText');
+  EndRound = async (message) => {
+    const modalText = this.modal.querySelector('#modalText');
     modalText.textContent = message;
-    await this.#sleep(200);
-    this.#modal.style.display = 'flex';
-    await this.#sleep(1900);
-    this.#modal.style.display = 'none';
+    await this.sleep(200);
+    this.body.style.filter = 'blur(10px)';
+    this.modal.style.display = 'flex';
+    await this.sleep(1900);
+    this.modal.style.display = 'none';
+    this.body.style.filter = 'blur(0)';
+
     this.CleanBoard();
   }
 
   async IsOver() {
-    if (this.#board.IsTie()) return this.#EndRound('Tie!');
+    if (this.board.IsTie()) return this.EndRound('Tie!');
   }
 }
 

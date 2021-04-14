@@ -1,15 +1,15 @@
 class Player {
-  #mark = 'x';
+  mark = 'x';
   constructor(mark) {
-    this.#mark = mark;
+    this.mark = mark;
   }
 
   GetMark() {
-    return this.#mark;
+    return this.mark;
   }
 
   ChangeMark(c) {
-    this.#mark = c;
+    this.mark = c;
   }
 }
 
