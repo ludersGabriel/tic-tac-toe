@@ -41,6 +41,14 @@ class GameBoard {
     return this.#cells;
   }
 
+  IsTie() {
+    for (let cell of this.#cells) {
+      if (!cell.textContent) return false;
+    }
+
+    return true;
+  }
+
 }
 
 export function newBoard() {

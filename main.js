@@ -1,15 +1,16 @@
-import { game } from './modules/game.js';
+import { NewGame } from './modules/game.js';
 import { newBoard } from './modules/gameboard.js';
+import { NewPlayer } from './modules/player.js';
 
 const board = newBoard();
-window.board = board;
-board.BuildBoard();
-board.DisplayBoard();
+const player = NewPlayer();
+const game = NewGame(board, player);
 
-for (let cell of board.GetCells()) {
-  cell.addEventListener('click', (e) => {
-    const id = e.target.dataset.id;
-    board.MarkBoard(id, 'x');
-  });
-}
+window.board = board;
+window.game = game;
+window.player = player;
+
+game.PlayGame();
+
+
 
