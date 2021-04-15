@@ -17,9 +17,11 @@ class Game {
   BuildEventListeners = () => {
     for (let cell of this.board.GetCells()) {
       cell.addEventListener('click', (e) => {
+        if (cell.textContent) return;
         const id = e.target.dataset.id;
         this.board.MarkBoard(id, this.player.GetMark());
         this.IsOver();
+        this.player.ChangeMark();
       });
     }
   }
@@ -32,13 +34,14 @@ class Game {
 
   CleanBoard() {
     this.board.CleanBoard();
+    this.player.ResetMark();
   }
 
   EndRound = async (message) => {
     const modalText = this.modal.querySelector('#modalText');
     modalText.textContent = message;
-    await this.sleep(200);
-    this.body.style.filter = 'blur(10px)';
+    await this.sleep(100);
+    this.body.style.filter = 'blur(5px)';
     this.modal.style.display = 'flex';
     await this.sleep(1900);
     this.modal.style.display = 'none';
@@ -48,6 +51,8 @@ class Game {
   }
 
   async IsOver() {
+    const player = this.board.IsWin();
+    if (player) return this.EndRound(`${player} won!`);
     if (this.board.IsTie()) return this.EndRound('Tie!');
   }
 }

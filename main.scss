@@ -3,6 +3,7 @@
 
 :root {
   font-family: sans-serif;
+  background-color: #FDFFFF;
 }
 
 *,
@@ -31,6 +32,8 @@ button {
     "footer";
   justify-items: center;
 
+  transition: all 500ms cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
   height: 100vh;
   width: 100vw;
 }
@@ -41,12 +44,37 @@ header {
 
 main {
   grid-area: content;
+
   width: 100%;
   height: 100%;
-
   display: grid;
   justify-items: center;
   align-items: center;
+
+  .card {
+    display: grid;
+    gap: 3em;
+    justify-items: center;
+
+    padding: 1em;
+    width: 50%;
+    border-radius: 10px;
+    box-shadow: 0 0 1em 1em #FFFAE3;
+
+    .configButtons {
+      width: 50%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr;
+      gap: 1em;
+
+      button {
+        border-radius: 10px;
+        box-shadow: 0 0 10px 1px #9FB3B3;
+      }
+    }
+  }
+
 
 }
 
@@ -58,4 +86,7 @@ header,
 footer {
   width: 100%;
   text-align: center;
+  color: white;
+  background-color: rgba(24, 23, 23, 0.836);
+  padding: .3em 0;
 }

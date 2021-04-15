@@ -1,5 +1,5 @@
 class Player {
-  mark = 'x';
+  mark = '✗';
   constructor(mark) {
     this.mark = mark;
   }
@@ -8,11 +8,15 @@ class Player {
     return this.mark;
   }
 
-  ChangeMark(c) {
-    this.mark = c;
+  ChangeMark() {
+    this.mark == '✗' ? this.mark = '☢' : this.mark = '✗';
+  }
+
+  ResetMark() {
+    this.mark = '✗';
   }
 }
 
-export function NewPlayer(mark = 'x') {
+export function NewPlayer(mark = '✗') {
   return new Player(mark);
 }
