@@ -162,14 +162,14 @@ main {
   -ms-grid-row: 2;
   -ms-grid-column: 1;
   grid-area: content;
-  width: 100%;
-  height: 100%;
   display: -ms-grid;
   display: grid;
   justify-items: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  width: 100%;
+  height: 100%;
 }
 
 main .card {
@@ -195,6 +195,11 @@ main .card .configButtons {
   gap: 1em;
 }
 
+main .card .configButtons .selected {
+  -webkit-filter: brightness(50%);
+          filter: brightness(50%);
+}
+
 main .card .configButtons button {
   border-radius: 10px;
   -webkit-box-shadow: 0 0 10px 1px #9FB3B3;
@@ -214,5 +219,12 @@ footer {
   color: white;
   background-color: rgba(24, 23, 23, 0.836);
   padding: .3em 0;
+  font-size: .7rem;
+}
+
+.cant {
+  color: red;
+  font-weight: bold;
+  font-size: 3.5rem;
 }
 /*# sourceMappingURL=main.css.map */

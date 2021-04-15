@@ -12,6 +12,12 @@ class Player {
     this.mark == '✗' ? this.mark = '☢' : this.mark = '✗';
   }
 
+  SetMark(c) {
+    if (c != '✗' && c != '☢') return;
+
+    this.mark = c;
+  }
+
   ResetMark() {
     this.mark = '✗';
   }

@@ -3,11 +3,13 @@ class Game {
   player = null;
   modal = null;
   body = null;
+  configButtons = null;
   constructor(board, player) {
     this.board = board;
     this.player = player;
     this.modal = document.querySelector('#modal');
     this.body = document.querySelector('#body');
+    this.configButtons = document.querySelector('#configButtons');
   }
 
   sleep = (ms) => {
@@ -24,6 +26,17 @@ class Game {
         this.player.ChangeMark();
       });
     }
+
+    for (let button of this.configButtons.children) {
+      button.addEventListener('click', () => {
+        for (let button of this.configButtons.children)
+          button.classList.remove('selected');
+        button.classList.toggle('selected');
+        this.CleanBoard();
+        this.player.SetMark(button.textContent);
+      })
+    }
+
   }
 
   PlayGame() {
