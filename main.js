@@ -5,8 +5,8 @@ import { NewCpu } from './modules/cpu.js';
 
 const board = newBoard();
 const player = NewPlayer();
-const game = NewGame(board, player);
 const cpu = NewCpu('✗', '☢', board);
+const game = NewGame(board, player, cpu);
 
 window.board = board;
 window.game = game;

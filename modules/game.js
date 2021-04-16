@@ -4,9 +4,11 @@ class Game {
   modal = null;
   body = null;
   configButtons = null;
-  constructor(board, player) {
+  cpu = null;
+  constructor(board, player, cpu) {
     this.board = board;
     this.player = player;
+    this.cpu = cpu;
     this.modal = document.querySelector('#modal');
     this.body = document.querySelector('#body');
     this.configButtons = document.querySelector('#configButtons');
@@ -18,12 +20,17 @@ class Game {
 
   BuildEventListeners = () => {
     for (let cell of this.board.GetCells()) {
-      cell.addEventListener('click', (e) => {
+      cell.addEventListener('click', async (e) => {
         if (cell.textContent) return;
         const id = e.target.dataset.id;
         this.board.MarkBoard(id, this.player.GetMark());
+
+        if (this.IsOver()) return;
+
+        await this.sleep(100);
+        this.board.MarkBoard(this.cpu.FindBestMove(), this.cpu.maxPlayer);
         this.IsOver();
-        this.player.ChangeMark();
+
       });
     }
 
@@ -32,8 +39,11 @@ class Game {
         for (let button of this.configButtons.children)
           button.classList.remove('selected');
         button.classList.toggle('selected');
-        this.CleanBoard();
+
         this.player.SetMark(button.textContent);
+        this.cpu.SwitchPlayers();
+
+        this.CleanBoard();
       })
     }
 
@@ -45,9 +55,14 @@ class Game {
     this.BuildEventListeners();
   }
 
-  CleanBoard() {
+  async CleanBoard() {
     this.board.CleanBoard();
-    this.player.ResetMark();
+    this.cpu.UpdateImaginaryBoard();
+    if (this.cpu.maxPlayer == '✗') {
+      await this.sleep(200);
+      const id = 9 * Math.random() << 0;
+      this.board.MarkBoard(id, this.cpu.maxPlayer);
+    }
   }
 
   EndRound = async (message) => {
@@ -63,13 +78,13 @@ class Game {
     this.CleanBoard();
   }
 
-  async IsOver() {
+  IsOver() {
     const player = this.board.IsWin();
     if (player) return this.EndRound(`${player} won!`);
     if (this.board.IsTie()) return this.EndRound('Tie!');
   }
 }
 
-export function NewGame(board, player = null) {
-  return new Game(board, player);
+export function NewGame(board, player = null, cpu) {
+  return new Game(board, player, cpu);
 }

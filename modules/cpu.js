@@ -16,6 +16,11 @@ class Cpu {
     }
   }
 
+  SwitchPlayers() {
+    const aux = this.minPlayer;
+    this.minPlayer = this.maxPlayer;
+    this.maxPlayer = aux;
+  }
 
   HasWon(imaginaryBoard) {
     if (!imaginaryBoard.length) return;
