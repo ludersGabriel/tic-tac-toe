@@ -41,7 +41,8 @@ class Game {
         button.classList.toggle('selected');
 
         this.player.SetMark(button.textContent);
-        this.cpu.SwitchPlayers();
+        if (button.textContent == this.cpu.maxPlayer)
+          this.cpu.SwitchPlayers();
 
         this.CleanBoard();
       })
